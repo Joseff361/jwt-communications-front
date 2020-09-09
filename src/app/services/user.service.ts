@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { User } from '../shared/user';
+import { Client } from '../shared/client';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,8 @@ export class UserService {
 
   }
 
-  // getClientByUser()
+  getClientByUser(userId: string): Observable<Client[]>{
+    return this.http.get<Client[]>(this.url + "/clients/finduser/" + userId);
+  }
 
 }

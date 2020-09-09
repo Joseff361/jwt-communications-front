@@ -115,6 +115,7 @@ export class NavbarComponent implements OnInit {
       } 
       
       localStorage.setItem('logged', 'true')
+      localStorage.setItem('user', JSON.stringify(this.usertoCheck));
 
       this.loginForm.reset({
         username: '',
