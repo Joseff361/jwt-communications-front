@@ -3,7 +3,9 @@
         <i class="fa fa-laptop" aria-hidden="true"></i>
     </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+    aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
@@ -18,16 +20,25 @@
             <i class="fa fa-briefcase" aria-hidden="true"></i> About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/lista" routerLinkActive="active">
+          <a class="nav-link" routerLink="/lista" routerLinkActive="active" [hidden]="hiddenClient">
             <i class="fa fa-desktop" aria-hidden="true"></i> Services</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">
             <i class="fa fa-phone" aria-hidden="true"></i> Contact</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/requests" routerLinkActive="active" [hidden]="hiddenEmployee">
+            <i class="fa fa-envelope-o" aria-hidden="true"></i> Requests</a>
+        </li>
       </ul>
-      <button type="button" class="btn navbar-text" data-toggle="modal" data-target="#exampleModal">
+      <button [hidden]="isLogged"
+      type="button" class="btn navbar-text" data-toggle="modal" data-target="#exampleModal" [hidden]="isLogged">
         <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+      </button>
+      <button type="button" class="btn navbar-text"  
+      [hidden]="!isLogged" (click)="logout()">
+        <i class="fa fa-sign-out" aria-hidden="true" ></i> Logout
       </button>
     </div>
   </nav>
@@ -36,42 +47,44 @@
 
   <!-- LoginForm -->
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <div 
+  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
       <div class="modal-content">
 
         <!-- header -->
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button  #closebutton type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">X</span>
           </button>
         </div>
 
         <!-- body -->
         <div class="modal-body">
-          <form>
+          <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              formControlName="username">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <div class="alert alert-danger" role="alert" 
+              *ngIf="formErrors.username">{{formErrors.username}}</div>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" class="form-control" id="exampleInputPassword1"
+              formControlName="password">
+              <div class="alert alert-danger" role="alert" 
+              *ngIf="formErrors.password">{{formErrors.password}}</div>
             </div>
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" 
+            [disabled]="loginForm.invalid" >Submit</button>
           </form>
-        </div>
-
-        <!-- footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>

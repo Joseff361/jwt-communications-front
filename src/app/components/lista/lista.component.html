@@ -1,1 +1,32 @@
-<p>lista works!</p>
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container">
+      <h1 class="masthead-heading mb-0">Elige un servicio y mejora tu estilo de vida!</h1>
+      <h2 class="masthead-subheading mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
+      <a href="#" class="btn btn-primary btn-xl mt-4">Learn More</a>
+    </div>
+  </div>
+</header>
+
+<div class="contaienr my-5 text-center">
+    <h3>SERVICIOS</h3>
+    <hr class="divider">
+</div>
+
+<div>  
+    <div class="container my-5 ">
+        <div class="row" *ngIf="Services">
+            <div class="col-md-4 my-3" *ngFor="let service of Services">
+                <div class="card bg-black">
+                    <div class="card-body">
+                      <h4 class="card-title">{{service.type}}</h4>
+                      <p class="card-text text-justify">
+                        {{service.description}} <br> <strong>Precio: {{service.price | currency: 'S/.'}}</strong>
+                      </p>
+                      <a  class="btn btn-primary" [routerLink]="['/service-detail', service._id]">Solicitar servicio</a>
+                    </div>
+                  </div>              
+            </div>
+        </div>
+    </div>    
+</div>

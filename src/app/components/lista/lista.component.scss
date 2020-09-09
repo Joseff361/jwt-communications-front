@@ -1,0 +1,30 @@
+header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(5rem + 72px);
+    padding-bottom: 5rem;
+    background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+header.masthead .masthead-content {
+    z-index: 1;
+    position: relative;
+}
+  
+header.masthead .masthead-content .masthead-heading {
+    font-size: 4rem;
+}
+  
+header.masthead .masthead-content .masthead-subheading {
+    font-size: 2rem;
+}
+
+hr.divider{
+    max-width: 3.25rem;
+    border-width: 0.2rem;
+    border-color: #f4623a;
+}

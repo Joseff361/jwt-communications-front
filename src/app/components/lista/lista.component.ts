@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '../../services/services.service';
+import { Service }  from '../../shared/services';
 
 @Component({
   selector: 'app-lista',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaComponent implements OnInit {
 
-  constructor() { }
+  Services: Service[];
+  url:string = 'http://localhost:3000/';
+
+  constructor(
+    private servicesService: ServicesService
+  ) { }
 
   ngOnInit(): void {
+    this.servicesService.getServices()
+      .subscribe(data => {
+         this.Services = data;
+      }, err => console.log(err))
   }
+
+  
 
 }

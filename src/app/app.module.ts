@@ -9,6 +9,13 @@ import { HomeComponent } from './components/home/home.component';
 import { ListaComponent } from './components/lista/lista.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ServicesService } from '../app/services/services.service';
+import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
+import { RequestsComponent } from './components/requests/requests.component';
+
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +25,18 @@ import { ContactComponent } from './components/contact/contact.component';
     HomeComponent,
     ListaComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    ServiceDetailComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
