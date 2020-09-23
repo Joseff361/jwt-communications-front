@@ -32,7 +32,7 @@ export class ServiceDetailComponent implements OnInit {
     this.servicesService.getService(id)
       .subscribe(service => {
         this.service = service;
-        console.log(this.service)
+        // console.log(this.service)
       }, err => console.log(err));
 
     this.solicitarServicio();
@@ -45,7 +45,7 @@ export class ServiceDetailComponent implements OnInit {
     this.userService.getClientByUser(this.user._id)
       .subscribe(client => {
         this.client = client[0];
-        console.log(this.client);
+        // console.log(this.client);
       }, err => console.log(err));
   }
 
@@ -64,7 +64,7 @@ export class ServiceDetailComponent implements OnInit {
         if(data.errors){
           console.log('Errores transaccionales');
         }else{
-          console.log(data)
+          // console.log(data)
           this.router.navigate(['/lista']);
         }
       }, err => console.log(err));

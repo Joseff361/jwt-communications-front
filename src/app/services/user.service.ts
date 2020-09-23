@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { User } from '../shared/user';
 import { Client } from '../shared/client';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,15 @@ export class UserService {
 
   getClientByUser(userId: string): Observable<Client[]>{
     return this.http.get<Client[]>(this.url + "/clients/finduser/" + userId);
+  }
+
+  getUserById(id: string): Observable<Client>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json' //The information will be suplied in the body
+      })
+    };
+    return this.http.post<Client>(this.url + '/clientid ', {id: id}, httpOptions);
   }
 
 }

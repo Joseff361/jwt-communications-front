@@ -1,49 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Service } from '../shared/services';
 import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServicesService {
+export class ClaimService {
 
   url:string = 'http://localhost:3000';
-  Service: Service[];
+
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getServices(): Observable<Service[]>{
-    return this.http.get<Service[]>(this.url + '/services');
-  }
-
-  getService(id: string): Observable<Service>{
-    return this.http.get<Service>(this.url + '/services/' + id);
-  }
-
-  addService(service: any): Observable<any>{
+  addClaim(claim: any): Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json' //The information will be suplied in the body
       })
     };
-    return this.http.put<any>(this.url + '/clients/service', service, httpOptions );
-  }
+    return this.http.post<any>(this.url + '/clients/claim', claim, httpOptions);
+  }   
 
-  deleteService(service: any): Observable<any>{
+  removeClaim(claim: any): Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json' //The information will be suplied in the body
       })
     };
-    return this.http.post<any>(this.url + '/clients/removeservice', service, httpOptions );
+    return this.http.post<any>(this.url + '/clients/deleteclaim', claim, httpOptions);
   }
 
 }
-
-
-

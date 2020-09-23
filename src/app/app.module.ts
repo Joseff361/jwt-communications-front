@@ -16,6 +16,7 @@ import { RequestsComponent } from './components/requests/requests.component';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AboutComponent,
     ContactComponent,
     ServiceDetailComponent,
-    RequestsComponent
+    RequestsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

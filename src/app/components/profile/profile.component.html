@@ -1,0 +1,107 @@
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3 d-inline-block" 
+                *ngIf="client" style="max-width: 20rem;">
+                <div class="card-header">Profile</div>
+                <div class="card-body">
+                  <img src="http://localhost:3000/images/profile.svg" class="card-img-top" alt="...">
+                  <h4 class="card-title">{{client.name}}</h4>
+                  <div class="card-text">
+                      <p>DNI: {{client.dniClient}}</p>
+                      <p>Telephone: {{client.telephone}}</p>
+                      <p>Email: {{client.email}}</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+
+            <h3 class="">SERVICES</h3>
+            <table class="table table-bordered text-center" *ngIf="services && client">
+                <thead>
+                    <tr>
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sv of services; index as i">
+                        <th>{{sv.type}}</th>
+                        <th>{{sv.description}}</th>
+                        <th>{{sv.price | currency:'S/. '}}</th>
+                        <th>{{sv.registrationDate | date}}</th>
+                        <th>{{sv.state}} &nbsp; 
+                            <a class="delete" (click)="deleteService($event, sv._id)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            &nbsp;
+                            <a class="delete" (click)="addType($event, sv.type)"
+                                data-toggle="modal" data-target="#claim">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
+
+                            <!-- modal -->
+                            <div class="modal fade text-justify" id="claim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Make claim</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <fieldset disabled>
+                                            <div class="form-group">
+                                                <label>Type</label>
+                                                <input type="text" class="form-control" [(ngModel)]="type">
+                                            </div>
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <label >Description</label>
+                                            <textarea [(ngModel)]="textArea"
+                                                class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" (click)="addClaim()">Send claim</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+                </table>  
+
+
+
+            <h3 class="mt-5">CLAIMS</h3>
+            <table class="table table-bordered text-center" *ngIf="client">
+                <thead>
+                    <tr>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                    <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let claim of client.claim">
+                    <th>{{claim.type}}</th>
+                    <th>{{claim.date | date}}</th>
+                    <th>{{claim.description}}</th>
+                    <th>{{claim.state}} &nbsp; 
+                        <a class="delete" (click)="deleteClaim($event, claim._id)"> 
+                            <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </th>
+                    </tr>
+                </tbody>
+                </table>  
+        </div>
+    </div>
+</section>
