@@ -133,7 +133,7 @@ export class RequestsComponent implements OnInit {
       id: this.idClient,
       idservice: this.idDocument,
       state: 'finalizado',
-      idemployee: this.user._id
+      idemployee: this.user.username
     }
 
     this.serviceService.replyService(reply)
