@@ -34,4 +34,13 @@ export class ClaimService {
     return this.http.post<any>(this.url + '/clients/deleteclaim', claim, httpOptions);
   }
 
+  replyClaim(reply: any): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json' //The information will be suplied in the body
+      })
+    };
+    return this.http.put<any>(this.url + '/clients/updateClaim', reply, httpOptions);
+  }
+
 }

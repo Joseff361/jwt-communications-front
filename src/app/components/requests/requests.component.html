@@ -1,1 +1,153 @@
-<p>requests works!</p>
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5">
+                <h1 class="masthead-heading mb-0 mt-5">Servicios y Reclamos en cola</h1>
+                <h2 class="masthead-subheading mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
+                <a href="#" class="btn btn-primary btn-xl mt-4">Learn More</a>
+            </div>
+            <div class="col-md-6">
+                <img src="../../../assets/images/trello.svg" alt="">
+            </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+
+<div class="Container my-5 text-center">
+    <h1>CLAIMS</h1>
+    <hr class="divider">
+    <div class="row my-5">
+        <div class="col-md-8 mx-auto">
+            <table class="table" *ngIf="clientClaim != []">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Reply</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let client of clientClaim">
+                    <th> {{client.type}}</th>
+                    <th> {{client.name}}</th>
+                    <th> {{client.description}}</th>
+                    <th> {{client.date | date}}</th>
+                    <th> {{client.claimState}}</th>
+                    <th> {{client.claimReply}}&nbsp;
+                        <a class="reply" data-toggle="modal" data-target="#reply1"
+                            (click)="addType($event, client.type, client.description, client.id, client.claimId)"
+                        ><i class="fa fa-reply" aria-hidden="true"></i></a>
+                    
+                        <!-- modal -->
+                        <div class="modal fade" id="reply1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Reply Claim</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <input type="text" class="form-control" [(ngModel)]="type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="form-control" [(ngModel)]="description">
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <label >Reply</label>
+                                        <textarea [(ngModel)]="textArea"
+                                            class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary" 
+                                    (click)="replyClaim()">Reply Claim</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <br>
+    <h1>SERVICES</h1>
+    <hr class="divider">
+    <div class="row my-5">
+        <div class="col-md-8 mx-auto">
+            <table class="table" *ngIf="clientService != [] && user">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let client of clientService ; index as i">
+                    <th> {{i}}</th>
+                    <th> {{client.name}}</th>
+                    <th> {{client.serviceState}}</th>
+                    <th> {{client.employeeName}}</th>
+                    <th> {{client.date | date}}</th>
+                    <th> 
+                        <a class="reply" data-toggle="modal" data-target="#reply2"
+                            (click)="addType2($event, client.serviceId, client.documentId, client.id)"
+                        ><i class="fa fa-reply" aria-hidden="true"></i></a>
+
+                        <!-- modal -->
+
+                        <div class="modal fade" id="reply2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Complete services</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body text-justify">
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <input type="text" class="form-control" [(ngModel)]="typeService">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="form-control" [(ngModel)]="descriptionService">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary" 
+                                    (click)="replyService()">Complete Servie</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

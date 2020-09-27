@@ -88,6 +88,7 @@
                     <th>Fecha</th>
                     <th>Descripcion</th>
                     <th>Estado</th>
+                    <th>Reply</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,6 +100,7 @@
                         <a class="delete" (click)="deleteClaim($event, claim._id)"> 
                             <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </th>
+                    <th>{{claim.reply}}</th>
                     </tr>
                 </tbody>
                 </table>  

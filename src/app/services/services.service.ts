@@ -43,6 +43,16 @@ export class ServicesService {
     return this.http.post<any>(this.url + '/clients/removeservice', service, httpOptions );
   }
 
+
+  replyService(reply: any): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json' //The information will be suplied in the body
+      })
+    };
+    return this.http.put<any>(this.url + '/clients/setservicestate', reply, httpOptions);
+  } 
+
 }
 
 

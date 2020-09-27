@@ -5,6 +5,6 @@ export class Client {
     telephone: number;
     email: string;
     user: string;
-    service: any[];
-    claim: any[];
+    service: any;
+    claim: any;
 }

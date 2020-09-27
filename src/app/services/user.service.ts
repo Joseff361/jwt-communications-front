@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<User[]>(this.url + '/users');
   }
 
+  getClients(): Observable<Client[]>{
+    return this.http.get<Client[]>(this.url + '/clients');
+  }
+
   async checkUser(userToCheck: any) {
     this.users = await this.getUsers().toPromise();
     console.log(this.users);
