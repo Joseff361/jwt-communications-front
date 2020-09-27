@@ -4,8 +4,8 @@ import { ServicesService } from '../../services/services.service';
 import { ClientClaim } from '../../shared/clientClaim';
 import { ClientService } from '../../shared/clientService';
 import { ClaimService } from '../../services/claim.service';
+import { SwalService } from '../../services/swal.service';
 import { User } from '../../shared/user';
-import { Client } from '../../shared/client';
 
 
 
@@ -39,6 +39,7 @@ export class RequestsComponent implements OnInit {
     private userService: UserService,
     private serviceService: ServicesService,
     private claimService: ClaimService,
+    private swal: SwalService,
   ) { 
   }
 
@@ -106,12 +107,12 @@ export class RequestsComponent implements OnInit {
       reply: this.textArea
     }
 
-    console.log(reply)
-
     this.claimService.replyClaim(reply)
       .subscribe(data => {
-        console.log(data)
-        window.location.reload(false);
+        this.swal.success('Claim completed successfully')
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       }, err => console.log(err));
   }
 
@@ -135,11 +136,12 @@ export class RequestsComponent implements OnInit {
       idemployee: this.user._id
     }
 
-    console.log(reply)
-
     this.serviceService.replyService(reply)
       .subscribe(reply => {
-        window.location.reload(false);
+        this.swal.success('Service completed successfully')
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       },err => console.log(err));
 
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router'; //access to the routers parameters
 import { ServicesService } from '../../services/services.service';
 import { UserService } from '../../services/user.service';
+import { SwalService } from '../../services/swal.service';
 import { Service }  from '../../shared/services';
 import { User } from 'src/app/shared/user';
 import { Client } from 'src/app/shared/client';
@@ -23,6 +24,7 @@ export class ServiceDetailComponent implements OnInit {
   constructor(
     private servicesService: ServicesService,
     private userService: UserService,
+    private swal: SwalService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
@@ -62,9 +64,9 @@ export class ServiceDetailComponent implements OnInit {
     console.log(this.order);
     this.servicesService.addService(this.order).subscribe(data => {
         if(data.errors){
-          console.log('Errores transaccionales');
+          this.swal.error('Errors detected. Try again');
         }else{
-          // console.log(data)
+          this.swal.success('Service requested correctly');
           this.router.navigate(['/lista']);
         }
       }, err => console.log(err));

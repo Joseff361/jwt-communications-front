@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ClaimService } from '../../services/claim.service';
 import { ServicesService } from '../../services/services.service';
+import { SwalService } from '../../services/swal.service';
 import { Client } from '../../shared/client';
 import { User } from '../../shared/user';
 
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private claimService: ClaimService,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private swal: SwalService
   ) { }
 
   ngOnInit(): void {
@@ -60,8 +62,10 @@ export class ProfileComponent implements OnInit {
     }
     this.servicesService.deleteService(svd)
       .subscribe(data => {
-        console.log('Eliminado correctamente')
-        window.location.reload(false);
+        this.swal.warning('Transaction completed successfully', 'Service removed')
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       }, err => console.log(err));
   }
   
@@ -73,8 +77,10 @@ export class ProfileComponent implements OnInit {
     console.log(cld);
     this.claimService.removeClaim(cld)
       .subscribe(data => {
-        console.log('Eliminado correctamente')
-        window.location.reload(false);
+        this.swal.warning('Transaction completed successfully', 'Claim removed')
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       }, err => console.log(err));
   }
 
@@ -92,7 +98,10 @@ export class ProfileComponent implements OnInit {
     console.log(addc)
     this.claimService.addClaim(addc)
       .subscribe(data =>{
-        window.location.reload(false);
+        this.swal.success('Claim completed successfully')
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       }, err => console.log(err));
   }
 

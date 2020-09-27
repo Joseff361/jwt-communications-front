@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { SwalService } from '../../services/swal.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/user';
@@ -46,6 +47,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private swal: SwalService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -121,6 +123,7 @@ export class NavbarComponent implements OnInit {
         username: '',
         password: ''
       });
+      this.swal.success('Logged correctly')
       this.loginFormDirective.resetForm(); //ensure a completely reset
       //#fform="ngForm"
       // window.location.reload()
@@ -137,6 +140,7 @@ export class NavbarComponent implements OnInit {
     this.hiddenEmployee = true;
     this.hiddenClient = true;
     this.isLogged = false;
+    this.swal.info('See you son!', 'Closing session')
     this.router.navigate(['/']);
   }
 
